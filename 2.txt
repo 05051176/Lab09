@@ -1,0 +1,46 @@
+
+#include <IRremote.h>                    // 引用 IRRemote 函式庫
+
+ 
+
+const int buttonPin =6;                 // 按鍵(pushbutton)接在 pin 4
+
+int buttonState = 0;                     // 按鍵狀態
+
+ 
+
+IRsend irsend;                           // 定義 IRsend 物件來發射紅外線訊號
+
+void setup()
+
+{
+
+  pinMode(buttonPin, INPUT);             // 把 buttonPin 設置成 INPUT
+
+}
+
+ 
+
+void loop()
+
+{
+
+  // 讀取按鍵狀態
+
+  buttonState = digitalRead(buttonPin);
+
+ 
+
+  // 檢查按鍵是否被按下(pressed)
+
+  // 有的話，buttonState 會是 HIGH
+
+  if (buttonState == HIGH) {   
+
+    // 發射紅外線訊號
+
+    irsend.sendNEC(0x4FB48B7, 32);   // 我電視 Power 鈕的紅外線編碼, 記得換成你的紅外線編碼
+
+  }
+
+}
